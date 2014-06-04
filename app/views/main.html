@@ -1,0 +1,38 @@
+<div ng-controller="BlogCtrl">
+  <div class="header">
+    <ul class="nav nav-pills pull-right">
+      <li class="active" ng-repeat="name in authors" ng-click="filterData($index)"><a ng-href="#">{{name}}</a></li>
+      <li class="active" ng-click="filterData()"><a ng-href="#">All</a></li>
+    </ul>
+    <h3 class="text-muted">stooge bloggerz</h3>
+  </div>
+
+  <div class="blog">
+    <h1>Latest Posts</h1>
+      <section  ng-repeat="post in blogPosts | filter: theFilter">
+        <h2>{{post.title}}</h2>
+        <p>{{post.body}}</p>
+        <p>{{post.author}}</p>
+      </section>
+
+  </div>
+
+  <div class="add-post">
+      <h1>Add new post</h1>
+      <p><select ng-model="selectAuthor" ng-options="author for author in authors">
+      <option value="">New Author</option>
+    </select>
+    <input data-ng-model="post.name" type="text" placeholder="Name"></p>
+    <p>
+      <input data-ng-model="post.title" type="text" placeholder="Post Title">
+    </p>
+    <p>
+      <input data-ng-model="post.body" type="text" placeholder="Post Body">
+    </p>
+    <p>
+      <button id="submitPost" type="button"
+      data-ng-disabled="!post.name || !post.title || !post.body"
+      data-ng-click="insertPost()">Add Customer</button>
+    </p>
+  </div>
+</div>
